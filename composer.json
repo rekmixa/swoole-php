@@ -1,0 +1,7 @@
+{
+    "name": "swoole/hello-world",
+    "description": "Swoole",
+    "require": {},
+    "require-dev": {},
+    "scripts": {}
+}
