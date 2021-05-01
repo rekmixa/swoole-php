@@ -1,5 +1,7 @@
 <?php
 
+require __DIR__ . '/../vendor/autoload.php';
+
 Co\run(function() {
   go(function() {
     while (true) {
