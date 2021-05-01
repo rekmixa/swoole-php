@@ -19,7 +19,7 @@ Co\run(function() {
       echo 'Process 2' . PHP_EOL;
       echo date('H:i:s') . PHP_EOL;
     }
-});
+  });
 
   go(function() {
     while (true) {
