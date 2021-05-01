@@ -6,21 +6,27 @@ Co\run(function() {
   go(function() {
     while (true) {
       sleep(1);
-      echo "Done 1\n";
+
+      echo 'Process 1' . PHP_EOL;
+      echo date('H:i:s') . PHP_EOL;
     }
   });
 
   go(function() {
     while (true) {
       sleep(1);
-      echo "Done 2\n";
+
+      echo 'Process 2' . PHP_EOL;
+      echo date('H:i:s') . PHP_EOL;
     }
 });
 
   go(function() {
     while (true) {
       sleep(1);
-      echo "Done 3\n";
+
+      echo 'Process 3' . PHP_EOL;
+      echo date('H:i:s') . PHP_EOL;
     }
   });
 });
