@@ -13,6 +13,7 @@ Co\run(function() {
   $test = generator();
 
   go(function() use ($test) {
+    sleep(1);
     echo 'P1: ' . $test->current() . PHP_EOL;
     $test->next();
     echo 'P1: ' . $test->current() . PHP_EOL;
@@ -20,6 +21,7 @@ Co\run(function() {
   });
 
   go(function() use ($test) {
+    sleep(1);
     echo 'P2: ' . $test->current() . PHP_EOL;
     $test->next();
     echo 'P2: ' . $test->current() . PHP_EOL;
