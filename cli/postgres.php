@@ -15,7 +15,7 @@ Co\run(function () {
 
   go(function () {
     $db = new \Swoole\Coroutine\PostgreSQL();
-    $db->connect('pgsql:host=db;port=5432;dbname=postgres;dbuser=postgres;dbpass=postgres');
+    $db->connect('pgsql:host=db;port=5432;dbname=postgres;user=postgres;password=postgres');
     $sql = <<<SQL
       CREATE table test(
         id INT(11) AUTO_INCREMENT PRIMARY KEY,
