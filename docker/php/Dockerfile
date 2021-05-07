@@ -75,3 +75,5 @@ RUN cd /tmp && git clone https://github.com/swoole/ext-postgresql.git \
 
 RUN touch /usr/local/etc/php/conf.d/swoole_postgresql.ini && \
     echo 'extension=swoole_postgresql.so' > /usr/local/etc/php/conf.d/swoole_postgresql.ini
+
+RUN docker-php-ext-install pdo pdo_pgsql pgsql

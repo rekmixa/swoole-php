@@ -3,35 +3,31 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 Co\run(function () {
-  // $db = new PDO('host=db;port=5432;dbname=postgres', 'postgres', 'postgres');
-  // $sql = <<<SQL
-  // CREATE table test(
-  //   id INT(11) AUTO_INCREMENT PRIMARY KEY,
-  //   increment INT(11) NOT NULL, 
-  // );
-  // SQL;
-  
-  // $db->exec($sql);
+  $db = new \Swoole\Coroutine\PostgreSQL();
+  $db->connect('host=db;port=5432;dbname=postgres;user=postgres;password=postgres');
 
-  go(function () {
-    $db = new \Swoole\Coroutine\PostgreSQL();
-    $db->connect('pgsql:host=db;port=5432;dbname=postgres;user=postgres;password=postgres');
+  defer(function () use ($db) {
     $sql = <<<SQL
-      CREATE table test(
-        id INT(11) AUTO_INCREMENT PRIMARY KEY,
-        increment INT(11) NOT NULL, 
-      );
+CREATE TABLE IF NOT EXISTS test(
+   id SERIAL PRIMARY KEY,
+   increment INT NOT NULL
+);
 SQL;
-  
-    $db->prepare('test', $sql);
-    $db->execute('test', []);
 
-    // $db->prepare('fortunes', 'SELECT id, message FROM Fortune');
-    // $res = $db->execute('fortunes', []);
-    // $arr = $db->fetchAll($res);
-  
-    // $db->prepare('select_query', 'SELECT id, randomnumber FROM World WHERE id = $1');
-    // $res = $db->execute('select_query', [123]);
-    // $ret = $db->fetchAll($res);
+    $db->prepare('create_table', $sql);
+    $db->execute('create_table', []);
+  });
+
+  defer(function () use ($db) {
+    $db->prepare('insert', 'INSERT INTO test (increment) VALUES ($1)');
+    $db->execute('insert', [1]);
+  });
+
+  defer(function () use ($db) {
+    $db->prepare('test', 'SELECT * FROM test');
+    $res = $db->execute('test', []);
+    $arr = $db->fetchAll($res);
+
+    var_dump($arr);
   });
 });
